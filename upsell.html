@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oferta Única — Confeitaria que Lucra</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --charcoal: #171e19;
+    --red: #ca0013;
+    --sage: #b7c6c2;
+    --offwhite: #eeebe3;
+    --green: #16a34a;
+    --white: #ffffff;
+    --radius-lg: 2.5rem;
+    --radius-md: 1.5rem;
+    --radius-sm: 1rem;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--offwhite);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── ALERT BAR ── */
+  #alert-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--red);
+    color: var(--white);
+    text-align: center;
+    padding: 11px 16px;
+    font-size: 13.5px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    border-bottom: 3px solid var(--charcoal);
+  }
+
+  .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 44px 0; }
+
+  /* ── HERO ── */
+  #hero {
+    background: var(--charcoal);
+    color: var(--white);
+    text-align: center;
+    padding: 46px 0 50px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(202,0,19,0.18);
+    border: 1px solid var(--red);
+    color: #ff4d5e;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
+  #hero h1 {
+    font-size: clamp(25px, 6.5vw, 38px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    color: var(--white);
+    padding: 0 16px;
+  }
+  #hero h1 .highlight { color: #ff4d5e; }
+  .hero-sub {
+    font-size: 16.5px;
+    color: rgba(255,255,255,0.86);
+    line-height: 1.6;
+    padding: 0 18px;
+    margin-bottom: 8px;
+  }
+
+  /* ── PRODUCT MOCKUP ── */
+  .mockup-wrap { text-align: center; margin: -26px auto 0; position: relative; z-index: 5; }
+  .mockup {
+    width: 80%;
+    max-width: 360px;
+    margin: 0 auto;
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px -16px rgba(0,0,0,0.35);
+    display: block;
+  }
+  .mockup-ph {
+    width: 80%; max-width: 360px; aspect-ratio: 3/4; margin: 0 auto;
+    background: linear-gradient(150deg, #1f2a23, #2c3a31);
+    border: 2px solid var(--sage);
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px -16px rgba(0,0,0,0.35);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--sage); text-align: center; padding: 24px; gap: 10px;
+  }
+  .mockup-ph .t1 { font-size: 12px; font-weight: 800; letter-spacing: 2px; color: var(--sage); }
+  .mockup-ph .t2 { font-size: 30px; font-weight: 900; color: var(--white); line-height: 1.1; }
+  .mockup-ph .t3 { font-size: 13px; font-weight: 700; color: #ff7d8a; }
+
+  /* ── HEADINGS ── */
+  .section-title {
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .section-title .red { color: var(--red); }
+  .lead {
+    font-size: 16.5px;
+    color: #444;
+    text-align: center;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .lead strong { color: var(--charcoal); }
+
+  /* ── BENEFITS LIST ── */
+  .benefits {
+    list-style: none;
+    max-width: 560px;
+    margin: 26px auto 0;
+    display: grid;
+    gap: 12px;
+  }
+  .benefits li {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px 16px 52px;
+    position: relative;
+    font-size: 15.5px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px -14px rgba(0,0,0,0.15);
+    line-height: 1.45;
+  }
+  .benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 16px; top: 50%;
+    transform: translateY(-50%);
+    width: 24px; height: 24px;
+    background: var(--green);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900;
+  }
+  .benefits li strong { color: var(--red); }
+
+  /* ── MODULES STRIP ── */
+  #modulos { background: var(--white); }
+  .mod-grid { display: grid; gap: 12px; max-width: 560px; margin: 24px auto 0; }
+  .mod {
+    border: 1px solid #e7e2d6;
+    border-left: 4px solid var(--red);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    background: var(--offwhite);
+  }
+  .mod .mn { font-size: 11px; font-weight: 900; color: var(--red); letter-spacing: 1px; }
+  .mod .mt { font-size: 16px; font-weight: 900; margin: 2px 0 3px; }
+  .mod .md { font-size: 13.5px; color: #555; line-height: 1.45; }
+
+  /* ── PRICE / OFFER ── */
+  #oferta { background: var(--charcoal); color: var(--white); }
+  .price-card {
+    background: var(--white);
+    color: var(--charcoal);
+    border-radius: var(--radius-md);
+    padding: 30px 24px 28px;
+    max-width: 520px;
+    margin: 0 auto;
+    box-shadow: 0 24px 60px -18px rgba(0,0,0,0.4);
+    text-align: center;
+  }
+  .price-anchor { font-size: 16px; color: #999; }
+  .price-anchor s { color: #bbb; }
+  .price-final { margin: 6px 0 4px; }
+  .price-final .value { font-size: 52px; font-weight: 900; color: var(--red); line-height: 1; }
+  .price-final .cents { font-size: 24px; vertical-align: top; }
+  .price-note { font-size: 14px; color: #666; margin-bottom: 4px; }
+  .economy-badge {
+    display: inline-block;
+    background: rgba(22,163,74,0.12);
+    color: var(--green);
+    font-size: 13px; font-weight: 800;
+    padding: 6px 16px; border-radius: 20px;
+    margin: 12px 0 6px;
+  }
+
+  /* ── CTA ── */
+  .cta-btn {
+    display: block;
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    text-align: center;
+    padding: 20px 18px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    box-shadow: 0 8px 30px rgba(202,0,19,0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    margin-top: 20px;
+    animation: pulse-red 2.4s infinite;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(202,0,19,0.5); animation: none; }
+  .cta-btn:active { transform: translateY(0); }
+  .cta-sub { text-align: center; font-size: 12.5px; color: #777; margin-top: 12px; }
+
+  @keyframes pulse-red {
+    0% { box-shadow: 0 8px 30px rgba(202,0,19,0.4); }
+    50% { box-shadow: 0 8px 30px rgba(202,0,19,0.4), 0 0 0 12px rgba(202,0,19,0); }
+    100% { box-shadow: 0 8px 30px rgba(202,0,19,0.4); }
+  }
+
+  /* ── GUARANTEE ── */
+  #garantia { background: var(--offwhite); }
+  .guarantee-box { text-align: center; max-width: 560px; margin: 0 auto; }
+  .seal {
+    width: 96px; height: 96px; margin: 0 auto 18px;
+    border-radius: 50%;
+    background: rgba(22,163,74,0.12);
+    border: 2px solid rgba(22,163,74,0.35);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .seal span { font-size: 34px; }
+  .seal small { font-size: 8.5px; color: var(--green); font-weight: 800; letter-spacing: 1px; }
+  .guarantee-text { font-size: 15.5px; color: #444; line-height: 1.7; }
+  .guarantee-text strong { color: var(--charcoal); }
+
+  /* ── DECLINE ── */
+  #recusar { background: var(--charcoal); padding-top: 8px; padding-bottom: 50px; text-align: center; }
+  .decline-link {
+    display: inline-block;
+    max-width: 460px;
+    color: rgba(255,255,255,0.4);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+  }
+  .decline-link:hover { color: rgba(255,255,255,0.7); }
+  .once-note {
+    color: #ff7d8a;
+    font-size: 12.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 22px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     BARRA DE ALERTA
+══════════════════════════════ -->
+<div id="alert-bar">✋ ESPERE! Seu pedido ainda NÃO foi finalizado — leia esta oferta única</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <span class="hero-badge">Oferta exclusiva · aparece uma única vez</span>
+    <h1>Você acaba de aprender a <span class="highlight">FAZER</span>.<br>Que tal aprender a <span class="highlight">LUCRAR</span>?</h1>
+    <p class="hero-sub">
+      Suas receitas já estão garantidas. Antes de acessá-las, adicione ao seu pedido o passo a passo para
+      transformar esses doces saudáveis em uma <strong style="color:#fff">renda extra de casa</strong> — com 1 clique.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     MOCKUP + PITCH
+══════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="mockup-wrap">
+    <img src="images/upsell.png" alt="Ebook Confeitaria que Lucra" class="mockup">
+  </div>
+
+  <div class="container" style="margin-top:34px;">
+    <h2 class="section-title">Receita boa, qualquer um come.<br><span class="red">Receita que dá lucro, poucos sabem fazer.</span></h2>
+    <p class="lead">
+      Existe um abismo entre <strong>fazer um doce gostoso</strong> e <strong>ganhar dinheiro com ele</strong>.
+      A diferença não está na receita — está em saber <strong>para quem vender, quanto cobrar e como divulgar</strong>.
+    </p>
+    <p class="lead">
+      O <strong>Confeitaria que Lucra</strong> é o guia direto ao ponto que te leva do
+      "só faço pra mim" à sua <strong>primeira venda</strong> — começando pequeno, da sua própria cozinha,
+      com investimento quase zero.
+    </p>
+
+    <ul class="benefits">
+      <li>Escolha um <strong>nicho lucrativo</strong> e se posicione como referência</li>
+      <li>A <strong>fórmula de precificação</strong> que dá lucro sem assustar o cliente</li>
+      <li>Monte <strong>combos e kits</strong> que aumentam o valor de cada pedido</li>
+      <li>Atraia clientes no <strong>Instagram</strong> e feche vendas no <strong>WhatsApp</strong></li>
+      <li>Um <strong>plano de ação de 30 dias</strong> para fazer sua 1ª venda já no 1º mês</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     MÓDULOS
+══════════════════════════════ -->
+<section id="modulos">
+  <div class="container">
+    <h2 class="section-title">O que tem dentro</h2>
+    <div class="mod-grid">
+      <div class="mod">
+        <div class="mn">MÓDULO 1</div>
+        <div class="mt">A Mentalidade e o Mercado</div>
+        <div class="md">Por que a confeitaria saudável é uma mina de oportunidade e como escolher seu nicho.</div>
+      </div>
+      <div class="mod">
+        <div class="mn">MÓDULO 2</div>
+        <div class="mt">Produtos e Precificação</div>
+        <div class="md">Calcular o custo real, definir o preço justo e criar combos que sobem o ticket médio.</div>
+      </div>
+      <div class="mod">
+        <div class="mn">MÓDULO 3</div>
+        <div class="mt">Atrair Clientes e Vender</div>
+        <div class="md">Instagram, fotos que vendem, atendimento no WhatsApp e fidelização para vender sempre.</div>
+      </div>
+      <div class="mod">
+        <div class="mn">BÔNUS</div>
+        <div class="mt">Seus Primeiros 30 Dias</div>
+        <div class="md">Um plano de ação semana a semana para tirar tudo do papel e faturar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     OFERTA + CTA ACEITAR
+══════════════════════════════ -->
+<section id="oferta">
+  <div class="container">
+    <h2 class="section-title" style="color:#fff;">Adicione agora ao seu pedido</h2>
+    <p class="lead" style="color:rgba(255,255,255,0.8);margin-bottom:26px;">
+      Como você já é cliente, libero por um valor simbólico — <strong style="color:#fff">só nesta página</strong>.
+    </p>
+
+    <div class="price-card">
+      <p class="price-anchor">De <s>R$ 97,00</s> por apenas</p>
+      <div class="price-final"><span class="value">R$ 37<span class="cents">,00</span></span></div>
+      <p class="price-note">pagamento único · acesso imediato</p>
+      <span class="economy-badge">💚 Economia de R$ 60,00</span>
+
+      <!-- ▼▼▼ COLE AQUI O LINK DE ACEITE 1-CLIQUE DA KIWIFY ▼▼▼ -->
+      <a href="{{LINK_ACEITAR_KIWIFY}}" class="cta-btn">SIM! QUERO ADICIONAR POR R$37</a>
+      <!-- ▲▲▲ ----------------------------------------------- ▲▲▲ -->
+
+      <p class="cta-sub">🔒 1 clique · sem digitar cartão de novo · garantia de 7 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     GARANTIA
+══════════════════════════════ -->
+<section id="garantia">
+  <div class="container">
+    <div class="guarantee-box">
+      <div class="seal">
+        <span>🛡️</span>
+        <small>7 DIAS</small>
+      </div>
+      <h2 class="section-title">Risco zero para você</h2>
+      <p class="guarantee-text">
+        Leve o guia, leia tudo e aplique. Se em <strong>7 dias</strong> você achar que não valeu,
+        devolvemos cada centavo — <strong>sem perguntas, sem burocracia</strong>. Ou seja: você só tem a ganhar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     RECUSAR (1-clique)
+══════════════════════════════ -->
+<section id="recusar">
+  <div class="container">
+    <p class="once-note">⚠️ Esta oferta não aparecerá novamente</p>
+    <!-- ▼▼▼ COLE AQUI O LINK DE RECUSA 1-CLIQUE DA KIWIFY ▼▼▼ -->
+    <a href="{{LINK_RECUSAR_KIWIFY}}" class="decline-link">
+      Não, obrigado. Prefiro abrir mão dessa oportunidade de aprender a lucrar com minhas receitas e seguir só com o material que já comprei.
+    </a>
+    <!-- ▲▲▲ ---------------------------------------------- ▲▲▲ -->
+  </div>
+</section>
+
+</body>
+</html>
