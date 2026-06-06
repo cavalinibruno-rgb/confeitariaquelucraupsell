@@ -1,72 +1,45 @@
-# Confeitaria que Lucra — Funil de Upsell
+# Confeitaria que Lucra — Upsell
 
-Páginas de **upsell** e **downsell** (1-clique) do ebook *Confeitaria que Lucra*, no padrão
-visual da marca (Nunito · charcoal `#171e19` · vermelho `#ca0013` · sage `#b7c6c2`).
+Página de **upsell** (1-clique) do ebook *Confeitaria que Lucra* — a oferta principal a
+**R$37** exibida logo após a compra do produto principal.
 
-As duas páginas ficam em **pastas separadas e independentes**, cada uma com seu próprio
-`index.html` na raiz — prontas para virar **dois projetos distintos no Vercel**.
+Padrão visual da marca (Nunito · charcoal `#171e19` · vermelho `#ca0013` · sage `#b7c6c2`).
+Integrada ao snippet oficial de upsell 1-clique da Kiwify.
 
-## Estrutura
+## Arquivos
 
-```
-upsell/
-  index.html              → oferta principal  (R$37)
-  images/upsell.png        → mockup 3D do ebook
-  images/upsell_capa.png   → capa (para anúncios/thumbnails)
+| Arquivo | O que é |
+|---|---|
+| `index.html` | Página do upsell — **R$37** |
+| `images/upsell.png` | Mockup 3D do ebook |
+| `images/upsell_capa.png` | Capa do ebook (para anúncios/thumbnails) |
 
-downsell/
-  index.html              → oferta de recuperação  (R$19)
-  images/upsell.png        → mockup 3D do ebook
-```
-
-## O funil
+## Onde entra no funil
 
 ```
 Produto principal R$9,90
    └─ Order bumps no checkout
-        └─ UPSELL R$37  → projeto "upsell"
+        └─ UPSELL R$37  → este repositório
              ├─ Aceitou  → entrega
-             └─ Recusou  → DOWNSELL R$19 → projeto "downsell"
-                                ├─ Aceitou → entrega
-                                └─ Recusou → página de obrigado/acesso
+             └─ Recusou  → DOWNSELL R$19 (repo: confeitariaquelucradownsell)
 ```
 
-## Deploy no Vercel (2 projetos, 1 repositório)
-
-O Vercel permite criar vários projetos a partir do mesmo repositório, cada um apontando para
-uma subpasta. Faça duas vezes:
-
-### Projeto 1 — Upsell
+## Deploy no Vercel
 1. **Add New → Project** → importe este repositório
-2. Em **Root Directory**, selecione `upsell`
-3. Framework: *Other* (site estático, sem build) → **Deploy**
-4. Domínio sugerido: algo como `confeitaria-upsell.vercel.app`
+2. Framework: *Other* (site estático, sem build) → **Deploy**
+3. O `index.html` está na **raiz**, então o domínio já abre a oferta direto — sem precisar
+   configurar Root Directory.
 
-### Projeto 2 — Downsell
-1. **Add New → Project** → importe **o mesmo** repositório de novo
-2. Em **Root Directory**, selecione `downsell`
-3. Framework: *Other* → **Deploy**
-4. Domínio sugerido: algo como `confeitaria-downsell.vercel.app`
+## Integração Kiwify (já configurada)
+O `index.html` já contém o snippet oficial de upsell 1-clique da Kiwify:
 
-Como cada pasta tem `index.html` na raiz, o domínio de cada projeto já abre a oferta direto.
-
-## Configuração na Kiwify (4 links 1-clique)
-
-Substitua os placeholders pelos links gerados na Kiwify ao configurar os upsells 1-clique:
-
-| Página | Placeholder | Para onde aponta |
-|---|---|---|
-| `upsell/index.html` | `{{LINK_ACEITAR_KIWIFY}}` | aceite do upsell (R$37) |
-| `upsell/index.html` | `{{LINK_RECUSAR_KIWIFY}}` | **recusa → URL do projeto downsell** |
-| `downsell/index.html` | `{{LINK_ACEITAR_DOWNSELL_KIWIFY}}` | aceite do downsell (R$19) |
-| `downsell/index.html` | `{{LINK_RECUSAR_DOWNSELL_KIWIFY}}` | recusa → página de obrigado/acesso |
-
-> Importante: o **"recusar" do upsell** deve levar ao **domínio do downsell**, e o
-> **"recusar" do downsell** à entrega/obrigado. Na Kiwify, ao encadear os upsells 1-clique,
-> esse fluxo é montado automaticamente — basta apontar cada botão para o link correto.
+- **Botão de aceite** (`#kiwify-upsell-trigger-349Z1G7`): processa a compra com 1 clique.
+- **Link de recusa** (`#kiwify-upsell-cancel-trigger-349Z1G7`): redireciona para o downsell.
+- **Container** (`#kiwify-upsell-349Z1G7`): guarda `data-downsell-url` apontando para
+  `https://confeitariaquelucradownsell.vercel.app/`.
+- **Script**: `https://snippets.kiwify.com/upsell/upsell.min.js`.
 
 ## Edições rápidas
-
-- **Preços:** procure por `R$ 37` em `upsell/index.html` e `R$ 19` em `downsell/index.html`.
-- **Mockup:** substitua `images/upsell.png` (em cada pasta) mantendo o nome do arquivo.
-- **Copy:** os textos estão direto no HTML, em blocos comentados por seção.
+- **Preço:** procure por `R$ 37` no `index.html`.
+- **Mockup:** substitua `images/upsell.png` mantendo o nome.
+- **URL do downsell:** atributo `data-downsell-url` no `index.html`.
