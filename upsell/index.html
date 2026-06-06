@@ -367,9 +367,11 @@
       <p class="price-note">pagamento único · acesso imediato</p>
       <span class="economy-badge">💚 Economia de R$ 60,00</span>
 
-      <!-- ▼▼▼ COLE AQUI O LINK DE ACEITE 1-CLIQUE DA KIWIFY ▼▼▼ -->
-      <a href="{{LINK_ACEITAR_KIWIFY}}" class="cta-btn">SIM! QUERO ADICIONAR POR R$37</a>
-      <!-- ▲▲▲ ----------------------------------------------- ▲▲▲ -->
+      <!-- ▼▼▼ UPSELL 1-CLIQUE KIWIFY · o container guarda a URL do downsell ▼▼▼ -->
+      <div id="kiwify-upsell-349Z1G7" data-upsell-url="" data-downsell-url="https://confeitariaquelucradownsell.vercel.app/">
+        <button id="kiwify-upsell-trigger-349Z1G7" class="cta-btn" type="button">SIM! QUERO ADICIONAR POR R$37</button>
+      </div>
+      <!-- ▲▲▲ ------------------------------------------------------------ ▲▲▲ -->
 
       <p class="cta-sub">🔒 1 clique · sem digitar cartão de novo · garantia de 7 dias</p>
     </div>
@@ -401,13 +403,16 @@
 <section id="recusar">
   <div class="container">
     <p class="once-note">⚠️ Esta oferta não aparecerá novamente</p>
-    <!-- ▼▼▼ COLE AQUI O LINK DE RECUSA 1-CLIQUE DA KIWIFY ▼▼▼ -->
-    <a href="{{LINK_RECUSAR_KIWIFY}}" class="decline-link">
+    <!-- ▼▼▼ RECUSA 1-CLIQUE KIWIFY · redireciona para o downsell ▼▼▼ -->
+    <div id="kiwify-upsell-cancel-trigger-349Z1G7" class="decline-link" style="cursor:pointer;">
       Não, obrigado. Prefiro abrir mão dessa oportunidade de aprender a lucrar com minhas receitas e seguir só com o material que já comprei.
-    </a>
-    <!-- ▲▲▲ ---------------------------------------------- ▲▲▲ -->
+    </div>
+    <!-- ▲▲▲ ------------------------------------------------------ ▲▲▲ -->
   </div>
 </section>
+
+<!-- Script oficial da Kiwify que ativa o upsell 1-clique -->
+<script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 
 </body>
 </html>
